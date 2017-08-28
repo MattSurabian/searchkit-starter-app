@@ -8,7 +8,6 @@ import { SearchkitManager,SearchkitProvider,
   InputFilter, GroupedSelectedFilters,
   Layout, TopBar, LayoutBody, LayoutResults,
   ActionBar, ActionBarRow, SideBar } from 'searchkit'
-import './index.css'
 
 const host = "http://demo.searchkit.co/api/movies"
 const searchkit = new SearchkitManager(host)
@@ -46,55 +45,55 @@ const MovieHitsListItem = (props)=> {
   )
 }
 
-class App extends Component {
+class SearchA extends Component {
   render() {
     return (
       <SearchkitProvider searchkit={searchkit}>
         <Layout>
           <TopBar>
-            <div className="my-logo">Searchkit Acme co</div>
+            <div className="my-logo">A</div>
             <SearchBox autofocus={true} searchOnChange={true} prefixQueryFields={["actors^1","type^2","languages","title^10"]}/>
           </TopBar>
 
-        <LayoutBody>
+          <LayoutBody>
 
-          <SideBar>
-            <HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
-            <DynamicRangeFilter field="metaScore" id="metascore" title="Metascore" rangeFormatter={(count)=> count + "*"}/>
-            <RangeFilter min={0} max={10} field="imdbRating" id="imdbRating" title="IMDB Rating" showHistogram={true}/>
-            <InputFilter id="writers" searchThrottleTime={500} title="Writers" placeholder="Search writers" searchOnChange={true} queryFields={["writers"]} />
-            <RefinementListFilter id="actors" title="Actors" field="actors.raw" size={10}/>
-            <RefinementListFilter translations={{"facets.view_more":"View more writers"}} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
-            <RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
-            <NumericRefinementListFilter id="runtimeMinutes" title="Length" field="runtimeMinutes" options={[
-              {title:"All"},
-              {title:"up to 20", from:0, to:20},
-              {title:"21 to 60", from:21, to:60},
-              {title:"60 or more", from:61, to:1000}
-            ]}/>
-          </SideBar>
-          <LayoutResults>
-            <ActionBar>
+            <SideBar>
+              <HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
+              <DynamicRangeFilter field="metaScore" id="metascore" title="Metascore" rangeFormatter={(count)=> count + "*"}/>
+              <RangeFilter min={0} max={10} field="imdbRating" id="imdbRating" title="IMDB Rating" showHistogram={true}/>
+              <InputFilter id="writers" searchThrottleTime={500} title="Writers" placeholder="Search writers" searchOnChange={true} queryFields={["writers"]} />
+              <RefinementListFilter id="actors" title="Actors" field="actors.raw" size={10}/>
+              <RefinementListFilter translations={{"facets.view_more":"View more writers"}} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
+              <RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
+              <NumericRefinementListFilter id="runtimeMinutes" title="Length" field="runtimeMinutes" options={[
+                {title:"All"},
+                {title:"up to 20", from:0, to:20},
+                {title:"21 to 60", from:21, to:60},
+                {title:"60 or more", from:61, to:1000}
+              ]}/>
+            </SideBar>
+            <LayoutResults>
+              <ActionBar>
 
-              <ActionBarRow>
-                <HitsStats translations={{
-                  "hitstats.results_found":"{hitCount} results found"
-                }}/>
-                <ViewSwitcherToggle/>
-                <SortingSelector options={[
-                  {label:"Relevance", field:"_score", order:"desc"},
-                  {label:"Latest Releases", field:"released", order:"desc"},
-                  {label:"Earliest Releases", field:"released", order:"asc"}
-                ]}/>
-              </ActionBarRow>
+                <ActionBarRow>
+                  <HitsStats translations={{
+                    "hitstats.results_found":"{hitCount} results found"
+                  }}/>
+                  <ViewSwitcherToggle/>
+                  <SortingSelector options={[
+                    {label:"Relevance", field:"_score", order:"desc"},
+                    {label:"Latest Releases", field:"released", order:"desc"},
+                    {label:"Earliest Releases", field:"released", order:"asc"}
+                  ]}/>
+                </ActionBarRow>
 
-              <ActionBarRow>
-                <GroupedSelectedFilters/>
-                <ResetFilters/>
-              </ActionBarRow>
+                <ActionBarRow>
+                  <GroupedSelectedFilters/>
+                  <ResetFilters/>
+                </ActionBarRow>
 
-            </ActionBar>
-            <ViewSwitcherHits
+              </ActionBar>
+              <ViewSwitcherHits
                 hitsPerPage={12} highlightFields={["title","plot"]}
                 sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year"]}
                 hitComponents={[
@@ -102,10 +101,10 @@ class App extends Component {
                   {key:"list", title:"List", itemComponent:MovieHitsListItem}
                 ]}
                 scrollTo="body"
-            />
-            <NoHits suggestionsField={"title"}/>
-            <Pagination showNumbers={true}/>
-          </LayoutResults>
+              />
+              <NoHits suggestionsField={"title"}/>
+              <Pagination showNumbers={true}/>
+            </LayoutResults>
 
           </LayoutBody>
         </Layout>
@@ -114,4 +113,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default SearchA;
